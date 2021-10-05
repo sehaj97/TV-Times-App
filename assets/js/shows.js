@@ -29,15 +29,17 @@ function getApiInfo(showName) {
             response.json().then(data => {
                 if(data.length !== 0){
                     localStorage.setItem('searched-shows', JSON.stringify(data));
-                    displayCards();
+                     displayCards();
                 } else {
                     errorModal.toggle();
                     $("#error-msg").text("Nothing Found! Try Searching with valid show names");
+                    $("main").removeClass('animated lightSpeedInLeft');
                 }
             })
         } else {
             errorModal.toggle();
             $("#error-msg").text("Something is wrong. Try again later");
+            $("main").removeClass('animated lightSpeedInLeft');
         }
     });
 };
@@ -71,7 +73,7 @@ function displayCards(){
             replaceValue = apiData[i].show.status;
         }
         showStatus = $("<p>").append("Show Status: " + replaceValue);
-        learnMore = $("<button>").addClass("btn btn-dark btn-more-"+i).append("Learn More");
+        learnMore = $("<button>").addClass("btn btn-dark btn-more-"+i).append("Click me Learn More!");
         $(showsCardContainer).append(cardImg);
         $(showsCardContainer).append(cardHeading);
         $(showsCardContainer).append(cardType);
@@ -79,11 +81,15 @@ function displayCards(){
         $(showsCardContainer).append(showStatus);
         $(showsCardContainer).append(learnMore); 
         $('body').on('click', ".btn-more-" + i, function() {
-            //add data here
+            $("main").removeClass('animated lightSpeedInLeft');
             displayShowDetails(this);
             infoModal.toggle();
         });
     }
+    
+    $(".card-img-top").hover(function(){
+        $(this).toggleClass('animated flip');
+    });
 } 
 
 function displayShowDetails(element){
@@ -155,6 +161,12 @@ function displayShowDetails(element){
     }
     
     $(showsCardContainer).append(moreInfoLink);
+    if($(".card-img-top").hasClass('animated flip')){
+        $(".card-img-top").removeClass('animated flip');
+    } else {
+        $(".card-img-top").addClass('animated flip');
+    }
+
 }
 
 var formSubmitHandler = function(event) {
@@ -168,8 +180,21 @@ var formSubmitHandler = function(event) {
     } else {
         errorModal.toggle();
         $("#error-msg").text("Please Provide Show Name to search");
+        $("main").removeClass('animated lightSpeedInLeft');
     }
 };
 
 getApiInfo("dragon");
 showFormEl.unbind('submit').bind('submit',  formSubmitHandler);
+    
+$(".btn-close-modal").click(function(event){
+    
+    event.preventDefault();
+    event.stopPropagation();
+    $("main").removeClass('animated lightSpeedInLeft');
+    if($(".card-img-top").hasClass('animated flip')){
+        $(".card-img-top").removeClass('animated flip');
+    } else {
+        $(".card-img-top").addClass('animated flip');
+    }
+});
