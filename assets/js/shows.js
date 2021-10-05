@@ -115,6 +115,15 @@ function displayShowDetails(element){
     $(showsCardContainer).append(cardRatings);
     $(showsCardContainer).append(showStatus);
 
+
+    var summmaryHeading = $(showsCardContainer).append("<p>");
+    var genre = "";
+    if(apiData[id].show.genres !== [] || apiData[id].show.genres !== null || apiData[id].show.genres !== undefined){
+        for(var i=0; i< apiData[id].show.genres.length; i++){
+            genre =  genre + "<span class='bg-success text-white px-2 mx-1 text-center'>"+ apiData[id].show.genres[i] +"</span>"; 
+        }
+        $(showsCardContainer).append("<p>" + genre + "<p>");
+    }
     var summmaryHeading = $("<h3>").append("Summary");
     $(showsCardContainer).append(summmaryHeading);
     var showSummary = apiData[id].show.summary;
