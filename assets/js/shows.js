@@ -114,6 +114,38 @@ function displayShowDetails(element){
     $(showsCardContainer).append(cardType);
     $(showsCardContainer).append(cardRatings);
     $(showsCardContainer).append(showStatus);
+
+    var summmaryHeading = $("<h3>").append("Summary");
+    $(showsCardContainer).append(summmaryHeading);
+    var showSummary = apiData[id].show.summary;
+    
+    if(showSummary === null){
+        showSummary = "<p>No Summary Found</p>";
+    }
+    
+    $(showsCardContainer).append(showSummary);
+
+    var siteHeading = $("<h3>").append("Watch it Here");
+    $(showsCardContainer).append(siteHeading);
+    var showLink = "<a href='"+apiData[id].show.officialSite+"' target='_blank'>Click Me!</a>";
+    
+    if(apiData[id].show.officialSite === null){
+        showLink = "<p>No Links Found</p>";
+    }
+    
+    $(showsCardContainer).append(showLink);
+
+    
+    var infoHeading = $("<h3>").append("Wanna Find out more");
+    
+    $(showsCardContainer).append(infoHeading);
+    var moreInfoLink = "<a href='"+apiData[id].show.url+"' target='_blank' class='btn btn-primary text-center mb-3'>Let's go</a>";
+    
+    if(apiData[id].show.url === null){
+        moreInfoLink = "<p>No Links Found</p>";
+    }
+    
+    $(showsCardContainer).append(moreInfoLink);
 }
 
 var formSubmitHandler = function(event) {
