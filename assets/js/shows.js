@@ -13,6 +13,7 @@ var replaceValue = "";
 var showInput = $("#show-input");
 var showFormEl = $("#show-form");
 var showNameParam = "";
+var showStatus = "";
 var errorModal = new bootstrap.Modal(document.getElementById('showModal'), {
     keyboard: false
 });
@@ -51,7 +52,7 @@ function displayCards(){
         }
         showsCol = $("<div>").addClass("col d-flex justify-content-center align-items-center show-col-"+i);
         $(showsRow).append(showsCol);
-        showsCardContainer = $("<div>").addClass("card m-3 text-center").attr("style", "width:15rem");
+        showsCardContainer = $("<div>").addClass("card m-3 text-center").attr("style", "width:16rem");
         $(showsCol).append(showsCardContainer);
         replaceValue = "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
         if(apiData[i].show.image !== null){
@@ -59,24 +60,62 @@ function displayCards(){
         }
         cardImg = $("<img>").attr("src", replaceValue).addClass("card-img-top");
         cardHeading = $("<h4>").append(apiData[i].show.name);
-        cardType = $("<p>").append(apiData[i].show.type + " | " + apiData[i].show.language);
+        cardType = $("<p>").append(apiData[i].show.type + " | " + apiData[i].show.language).addClass("m-0");
         replaceValue = apiData[i].show.rating.average;
         if(apiData[i].show.rating.average == null){
             replaceValue = "No"
         }
-        cardRatings = $("<p>").append(replaceValue + " Ratings");
+        cardRatings = $("<p>").append(replaceValue + " Ratings").addClass("bg-info rounded mx-auto mb-0 text-center w-75");
+        replaceValue = "Unknown";
+        if(apiData[i].show.status !== null){
+            replaceValue = apiData[i].show.status;
+        }
+        showStatus = $("<p>").append("Show Status: " + replaceValue);
         learnMore = $("<button>").addClass("btn btn-dark btn-more-"+i).append("Learn More");
         $(showsCardContainer).append(cardImg);
         $(showsCardContainer).append(cardHeading);
         $(showsCardContainer).append(cardType);
         $(showsCardContainer).append(cardRatings);
+        $(showsCardContainer).append(showStatus);
         $(showsCardContainer).append(learnMore); 
         $('body').on('click', ".btn-more-" + i, function() {
             //add data here
+            displayShowDetails(this);
             infoModal.toggle();
         });
     }
 } 
+
+function displayShowDetails(element){
+    $("#show-title").html("");
+    $("#show-details").html("");
+    var id = $(element).attr("class").replace("btn btn-dark btn-more-", "");
+    apiData = JSON.parse(localStorage.getItem('searched-shows'));
+    $("#show-title").append(apiData[id].show.name).addClass("text-center");
+    showsCardContainer = $("<div>").addClass("card text-center w-100 d-flex justify-content-center align-items-center");
+    $("#show-details").append(showsCardContainer);
+    replaceValue = "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
+    if(apiData[id].show.image !== null){
+        replaceValue = apiData[id].show.image.medium;
+    }
+    cardImg = $("<img>").attr("src", replaceValue).addClass("card-img-top img-thumbnail w-50");
+    cardType = $("<p>").append(apiData[id].show.type + " | " + apiData[id].show.language).addClass("m-0");
+    replaceValue = apiData[id].show.rating.average;
+    if(apiData[id].show.rating.average == null){
+        replaceValue = "No"
+    }
+    cardRatings = $("<p>").append(replaceValue + " Ratings").addClass("bg-info rounded mx-auto mb-0 text-center w-75");
+    replaceValue = "Unknown";
+    if(apiData[id].show.status !== null){
+        replaceValue = apiData[id].show.status;
+    }
+    showStatus = $("<p>").append("Show Status: " + replaceValue);
+    $(showsCardContainer).append(cardImg);
+    $(showsCardContainer).append(cardType);
+    $(showsCardContainer).append(cardRatings);
+    $(showsCardContainer).append(showStatus);
+}
+
 var formSubmitHandler = function(event) {
     
     event.preventDefault();
