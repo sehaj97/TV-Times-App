@@ -25,7 +25,7 @@
             <div class="card m-5">
                 <h4 class="card-header text-uppercase text-center">Search Another Show</h4>
                 <form id="show-form" class="card-body">
-                  <input name="show" id="show" type="text" autofocus="true" class="show-input w-100 rounded" placeholder="Dragon Ball" value=""/>
+                  <input name="show" id="show-input" type="text" autofocus="true" class="show-input w-100 rounded" placeholder="Dragon" value=""/>
                   <button type="submit" class="btn btn-primary mt-2 w-100">Search</button>
                 </form>
             </div>
@@ -39,8 +39,7 @@
                 <h5 class="modal-title" id="showModalLabel">Error</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body">
-                Nothing Found! Try Searching another show
+              <div id="error-msg" class="modal-body">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -48,6 +47,24 @@
             </div>
           </div>
         </div>
+
+        <!-- info Modal -->
+        <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="infoModalLabel"><span id="show-title"></span> Details</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="show-details" class="modal-body">
+                  hi i am other guy
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
         <section id="show-lists" class="d-flex flex-column justify-content-center align-items-center">
             

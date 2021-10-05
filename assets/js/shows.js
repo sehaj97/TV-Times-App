@@ -1,5 +1,6 @@
 
 var showsList = $("#show-lists");
+var apiData = "";
 var showsRow = "";
 var showsCol = "";
 var showsCardContainer = "";
@@ -9,54 +10,86 @@ var cardType = "";
 var cardRatings = "";
 var learnMore = "";
 var replaceValue = "";
+var showInput = $("#show-input");
+var showFormEl = $("#show-form");
+var showNameParam = "";
 var errorModal = new bootstrap.Modal(document.getElementById('showModal'), {
     keyboard: false
-  });
+});
+var infoModal = new bootstrap.Modal(document.getElementById('infoModal'), {
+    keyboard: false
+});
 function getApiInfo(showName) {
+    window.localStorage.clear();
     var showAPI = "https://api.tvmaze.com/search/shows?q=" + showName;
     fetch(showAPI)
 	.then(response => {
         if(response.ok){
             response.json().then(data => {
-                console.log(data);
                 if(data.length !== 0){
-                    displayCards(data);
+                    localStorage.setItem('searched-shows', JSON.stringify(data));
+                    displayCards();
                 } else {
                     errorModal.toggle();
+                    $("#error-msg").text("Nothing Found! Try Searching with valid show names");
                 }
             })
         } else {
-            alert("Something is wrong/ show doesn't exist!. Try again with correct input")
+            errorModal.toggle();
+            $("#error-msg").text("Something is wrong. Try again later");
         }
     });
 };
 
-function displayCards(apiData){
- showsList.html("");
- for(var i=0; i<apiData.length; i++){
-    if(i%5 === 0){
-        showsRow = $("<div>").addClass("row d-flex justify-content-center align-items-center show-row-"+i);
-        showsList.append(showsRow);
+function displayCards(){
+    apiData = JSON.parse(localStorage.getItem('searched-shows'));
+    showsList.html("");
+    for(var i=0; i<apiData.length; i++){
+        if(i%5 === 0){
+            showsRow = $("<div>").addClass("row d-flex justify-content-center align-items-center show-row-"+i);
+            showsList.append(showsRow);
+        }
+        showsCol = $("<div>").addClass("col d-flex justify-content-center align-items-center show-col-"+i);
+        $(showsRow).append(showsCol);
+        showsCardContainer = $("<div>").addClass("card m-3 text-center").attr("style", "width:15rem");
+        $(showsCol).append(showsCardContainer);
+        replaceValue = "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
+        if(apiData[i].show.image !== null){
+            replaceValue = apiData[i].show.image.medium;
+        }
+        cardImg = $("<img>").attr("src", replaceValue).addClass("card-img-top");
+        cardHeading = $("<h4>").append(apiData[i].show.name);
+        cardType = $("<p>").append(apiData[i].show.type + " | " + apiData[i].show.language);
+        replaceValue = apiData[i].show.rating.average;
+        if(apiData[i].show.rating.average == null){
+            replaceValue = "No"
+        }
+        cardRatings = $("<p>").append(replaceValue + " Ratings");
+        learnMore = $("<button>").addClass("btn btn-dark btn-more-"+i).append("Learn More");
+        $(showsCardContainer).append(cardImg);
+        $(showsCardContainer).append(cardHeading);
+        $(showsCardContainer).append(cardType);
+        $(showsCardContainer).append(cardRatings);
+        $(showsCardContainer).append(learnMore); 
+        $('body').on('click', ".btn-more-" + i, function() {
+            //add data here
+            infoModal.toggle();
+        });
     }
-    showsCol = $("<div>").addClass("col d-flex justify-content-center align-items-center show-col-"+i);
-    $(showsRow).append(showsCol);
-    showsCardContainer = $("<div>").addClass("card m-3 text-center").attr("style", "width:15rem");
-    $(showsCol).append(showsCardContainer);
-    replaceValue = apiData[i].show.image.medium;
-    if(apiData[i].show.image.medium == null){
-        replaceValue = "../images/popcorn.png"
+} 
+var formSubmitHandler = function(event) {
+    
+    event.preventDefault();
+    event.stopPropagation();
+    if(showInput.val() != ""){
+        showNameParam = showInput.val();
+        getApiInfo(showNameParam);
+        showInput.val("");
+    } else {
+        errorModal.toggle();
+        $("#error-msg").text("Please Provide Show Name to search");
     }
-    cardImg = $("<img>").attr("src", replaceValue).addClass("card-img-top");
-    cardHeading = $("<h4>").append(apiData[i].show.name);
-    cardType = $("<p>").append(apiData[i].show.type + " | " + apiData[i].show.language);
-    cardRatings = $("<p>").append(apiData[i].show.rating.average + " stars");
-    learnMore = $("<button>").addClass("btn btn-dark").append("Learn More");
-    $(showsCardContainer).append(cardImg);
-    $(showsCardContainer).append(cardHeading);
-    $(showsCardContainer).append(cardType);
-    $(showsCardContainer).append(cardRatings);
-    $(showsCardContainer).append(learnMore); 
- }
-}
+};
 
-getApiInfo("dragon Ball")
+getApiInfo("dragon");
+showFormEl.unbind('submit').bind('submit',  formSubmitHandler);
