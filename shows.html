@@ -20,28 +20,30 @@
           </nav>
     </header>
     <main>
-        <section class="d-flex flex-column justify-content-center align-items-center px-3 text-center" style="height: 20vh;">
-            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#showModal">
-                Search Another Show Data
-            </button>
+        <h1 class="display-2 text-center">TV SHOWS</h1>
+        <section class="d-flex flex-column justify-content-center align-items-center px-3 text-center">
+            <div class="card m-5">
+                <h4 class="card-header text-uppercase text-center">Search Another Show</h4>
+                <form id="show-form" class="card-body">
+                  <input name="show" id="show" type="text" autofocus="true" class="show-input w-100 rounded" placeholder="Dragon Ball" value=""/>
+                  <button type="submit" class="btn btn-primary mt-2 w-100">Search</button>
+                </form>
+            </div>
         </section>
           
-        <!-- SEARCH Modal -->
+        <!-- error Modal -->
         <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="showModalLabel">Search a new show</h5>
+                <h5 class="modal-title" id="showModalLabel">Error</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <form id="show-form">
-                      <input name="show" id="show" type="text" autofocus="true" class="form-input w-100 rounded" placeholder="Dragon Ball" value=""/>
-                  </form>
+                Nothing Found! Try Searching another show
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Search</button>
               </div>
             </div>
           </div>
@@ -50,26 +52,6 @@
         <section id="show-lists" class="d-flex flex-column justify-content-center align-items-center">
             
         </section>
-
-        
-          
-        <!-- show INFO Modal -->
-        <div class="modal fade" id="showInfoModal" tabindex="-1" aria-labelledby="showInfoModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="showInfoModalLabel"></h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div id="show-info" class="modal-body">
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Search</button>
-                </div>
-              </div>
-            </div>
-          </div>
     </main>
 
     <footer class="p-3 text-center bg-dark text-white">&copy; Copyright Team-Cara-dune 2021</footer>

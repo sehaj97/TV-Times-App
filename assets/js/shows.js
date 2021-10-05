@@ -6,13 +6,24 @@ var showsCardContainer = "";
 var cardImg = "";
 var cardHeading = "";
 var cardType = "";
+var cardRatings = "";
+var learnMore = "";
+var replaceValue = "";
+var errorModal = new bootstrap.Modal(document.getElementById('showModal'), {
+    keyboard: false
+  });
 function getApiInfo(showName) {
     var showAPI = "https://api.tvmaze.com/search/shows?q=" + showName;
     fetch(showAPI)
 	.then(response => {
         if(response.ok){
             response.json().then(data => {
-                displayCards(data);
+                console.log(data);
+                if(data.length !== 0){
+                    displayCards(data);
+                } else {
+                    errorModal.toggle();
+                }
             })
         } else {
             alert("Something is wrong/ show doesn't exist!. Try again with correct input")
@@ -29,15 +40,23 @@ function displayCards(apiData){
     }
     showsCol = $("<div>").addClass("col d-flex justify-content-center align-items-center show-col-"+i);
     $(showsRow).append(showsCol);
-    showsCardContainer = $("<div>").addClass("card m-3 text-center").attr("style", "width:18rem");
+    showsCardContainer = $("<div>").addClass("card m-3 text-center").attr("style", "width:15rem");
     $(showsCol).append(showsCardContainer);
-    cardImg = $("<img>").attr("src", apiData[i].show.image.medium).addClass("card-img-top");
+    replaceValue = apiData[i].show.image.medium;
+    if(apiData[i].show.image.medium == null){
+        replaceValue = "../images/popcorn.png"
+    }
+    cardImg = $("<img>").attr("src", replaceValue).addClass("card-img-top");
     cardHeading = $("<h4>").append(apiData[i].show.name);
-    cardType = $("<p>").append(apiData[i].show.type);
+    cardType = $("<p>").append(apiData[i].show.type + " | " + apiData[i].show.language);
+    cardRatings = $("<p>").append(apiData[i].show.rating.average + " stars");
+    learnMore = $("<button>").addClass("btn btn-dark").append("Learn More");
     $(showsCardContainer).append(cardImg);
     $(showsCardContainer).append(cardHeading);
     $(showsCardContainer).append(cardType);
+    $(showsCardContainer).append(cardRatings);
+    $(showsCardContainer).append(learnMore); 
  }
 }
 
-getApiInfo("dragon ball")
+getApiInfo("dragon Ball")
