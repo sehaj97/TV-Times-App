@@ -27,7 +27,7 @@ function displaydata(){
             for  ( var b =0; b<responsedata.results.lists[l].books.length; b++){
                
                 var booksCol= $("<div>").addClass("col d-flex justify-content-center align-items-center");
-                var booksCard = $("<div>").addClass("card m-3 text-center").attr("style", "width:16rem");
+                var booksCard = $("<div>").addClass("card m-3 text-center").attr("style", "width:12rem");
                 
                 var test = responsedata.results.lists[l].books[b];
                 
