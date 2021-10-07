@@ -47,7 +47,8 @@ function displaydata(){
                 booksCard.append(cardImg);
                 booksCard.append(cardTitle);
                 booksCard.append(cardLink);
-                var bookswriter =$("<ul>")
+                var bookswriter =$("<p>").text(responsedata.results.lists[l].books[b].contributor);
+                booksCard.append(bookswriter);
             }
         } else{
             $("#bookslist").html("No books found")
