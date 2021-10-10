@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel = "stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.compat.css"/>
+    <link rel = "stylesheet" href= "./assets/css/article.css">
+    <title>News Articles</title>
+  </head>
+  <body>
+      <header>
+        <nav class="navbar navbar-dark bg-dark text-white text-center animated lightSpeedInRight">
+            <div class="container-fluid d-flex justify-content-center p-0">
+              <a class="navbar-brand p-0" href="./index.html">
+                <h1 class="display-1"><img src="./assets/images/tv-monitor.png" alt="articles" style="height: 80px;width: 80px;">TV TIMES</h1></a>
+            </div>
+          </nav>
+    </header>
+    <main class="animated lightSpeedInLeft">
+        <section class="d-flex flex-column justify-content-center align-items-center px-3 text-center bg-image-2">
+            <h1 class="text-center display-5 text-white bg-dark m-5 p-5 rounded animated rollIn">News Articles</h1>
+            <div class="card m-5 animated slideInUp">
+                <h4 class="card-header text-uppercase text-center">Search Articles</h4>
+                <form id="article-form" class="card-body">
+                  <input name="article" id="article-input" type="text" autofocus="true" class="article-input w-100 rounded" placeholder="Article" value=""/>
+                  <button type="submit" class="btn btn-primary mt-2 w-100">Search</button>
+                </form>
+            </div>
+        </section>
+    
+        <section id="article-list" class="d-flex flex-column justify-content-center align-items-center bg-image-1">
+            </section>
+    </main>
+
+    <footer class="p-3 text-center bg-dark text-white">&copy; Copyright Team-Cara-dune 2021</footer>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./assets/js/article.js"></script>
+  </body>
+</html>
