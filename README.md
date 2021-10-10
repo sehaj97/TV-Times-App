@@ -37,12 +37,32 @@ Article page -show news articles based on the search input keyword.
 ## Screenshots
 
 ### screenshot Home Page
+
 ![Screenshot](assets/images/1.PNG)
+
+![Screenshot](assets/images/1.1.PNG)
+
 ### screenshot Tv series Page
+
 ![Screenshot](assets/images/2.PNG)
+
+![Screenshot](assets/images/2.1.PNG)
+
 ### screenshot books page Page
+
 ![Screenshot](assets/images/3.PNG)
+
+![Screenshot](assets/images/3.1.PNG)
+
 ### screenshot news article page Page
+
 ![Screenshot](assets/images/4.PNG)
+
+![Screenshot](assets/images/4.1.PNG)
+
 ### screenshot movie reviews Page
+
 ![Screenshot](assets/images/5.PNG)
+
+![Screenshot](assets/images/5.1.PNG)
+
