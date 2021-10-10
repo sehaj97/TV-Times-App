@@ -1,0 +1,13 @@
+.bg-image-2 {
+    background-image: url(../images/newspapers.jpg);
+    background-position: center;
+    background-repeat: repeat; 
+    width: 100vw;
+}
+
+.bg-image-1 {
+    background-image: url(../images/b&w\ background.jpg);
+    background-position: center;
+    background-repeat: repeat; 
+    width: 100vw;
+}
