@@ -21,14 +21,15 @@ var infoModal = new bootstrap.Modal(document.getElementById('infoModal'), {
     keyboard: false
 });
 function getApiInfo(showName) {
-    window.localStorage.clear();
     var showAPI = "https://api.tvmaze.com/search/shows?q=" + showName;
     fetch(showAPI)
 	.then(response => {
         if(response.ok){
             response.json().then(data => {
                 if(data.length !== 0){
-                    localStorage.setItem('searched-shows', JSON.stringify(data));
+                    if(localStorage.getItem("searched-shows") === null){
+                        localStorage.setItem('searched-shows', JSON.stringify(data));
+                    }
                      displayCards();
                 } else {
                     errorModal.toggle();
@@ -175,6 +176,7 @@ var formSubmitHandler = function(event) {
     event.stopPropagation();
     if(showInput.val() != ""){
         showNameParam = showInput.val();
+        window.localStorage.clear();
         getApiInfo(showNameParam);
         showInput.val("");
     } else {
@@ -183,9 +185,6 @@ var formSubmitHandler = function(event) {
         $("main").removeClass('animated lightSpeedInLeft');
     }
 };
-
-getApiInfo("dragon");
-showFormEl.unbind('submit').bind('submit',  formSubmitHandler);
     
 $(".btn-close-modal").click(function(event){
     
@@ -198,3 +197,6 @@ $(".btn-close-modal").click(function(event){
         $(".card-img-top").addClass('animated flip');
     }
 });
+
+getApiInfo("dragon");
+showFormEl.unbind('submit').bind('submit',  formSubmitHandler);

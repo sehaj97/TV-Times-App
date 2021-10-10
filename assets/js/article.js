@@ -3,20 +3,20 @@ var searchFormEl = $("#article-form");
 var searchNameParam = "";
 
 function getApiInfo(searchInput) {
-  window.localStorage.clear();
   fetch("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=Y6O05eGFrocThyWgTXDwGb0TdGjddUZg&q="+ searchInput)
   .then(response => response.json()) 
   .then(data => { 
-    localStorage.setItem('articleapi', JSON.stringify(data));
+    if(localStorage.getItem("articleapi") === null){
+        localStorage.setItem('articleapi', JSON.stringify(data));
+    }
    displayData();
     } 
   )
 }
 
 function displayData() {
-    
   var responseData = JSON.parse(localStorage.getItem('articleapi'));
-  $("#article-list").html("");
+  $("#article-list").html("").removeClass("display-2 text-danger");
   for (var i=0 ; i<responseData.response.docs.length ; i++){
       if(i%5===0){
           var articleRow = $("<div>").addClass("row m-3 d-flex justify-content-center align-items-center");
@@ -44,8 +44,13 @@ function displayData() {
     event.stopPropagation();
     if(searchInput.val() != ""){
         searchNameParam = searchInput.val();
+        window.localStorage.clear();
         getApiInfo(searchNameParam);
         searchInput.val("");
+    } else {
+      $("#article-list").html("Search does not exist/ no search provided").addClass("display-2 text-danger");
+      window.localStorage.clear();
+
     }
 };
 

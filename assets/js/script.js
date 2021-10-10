@@ -10,3 +10,6 @@ $(".profile-logo").hover(function(){
 $(".card-info-animation").hover(function(){
     $(this).toggleClass('animated pulse');
 });
+
+
+window.localStorage.clear();

@@ -1,13 +1,19 @@
+
+var infoModal = new bootstrap.Modal(document.getElementById('infoModal'), {
+    keyboard: false
+});
 function getApiInfo() {
-    window.localStorage.clear();
     var movieapi = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=w0C3z7bpN0npCBXWAjTsW6UuX1TP8BaL";
     fetch(movieapi)
     .then(response => {
         if(response.ok){
             response.json().then(data => {
                 if(data.length !== 0){
-                    localStorage.setItem('movieapi', JSON.stringify(data));
-                    displayData()
+                    if(localStorage.getItem("movieapi") === null){
+                        localStorage.setItem('movieapi', JSON.stringify(data));
+                        infoModal.toggle();
+                    }
+                    displayData();
                 }
             })
         }
@@ -17,8 +23,6 @@ function getApiInfo() {
 function displayData(){
     
     var responseData = JSON.parse(localStorage.getItem('movieapi'));
-
-    console.log(responseData.results.length);
 
     for(var i = 0; i< responseData.results.length; i++){
         if(i%5 === 0){

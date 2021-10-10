@@ -1,15 +1,19 @@
 
+var infoModal = new bootstrap.Modal(document.getElementById('infoModal'), {
+    keyboard: false
+});
 function getApiInfo() {
-    window.localStorage.clear();
     var booksAPI = "https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=IlTS3Agt7O38JYk9APKPbG4xUMKPpAza";
     fetch(booksAPI)
     .then(response => {
         if(response.ok){
             response.json().then(data => {
                 if(data.length !== 0){
-                    localStorage.setItem('booksAPI', JSON.stringify(data));
-                   displaydata()
-                    
+                    if(localStorage.getItem("booksAPI") === null){
+                        infoModal.toggle();
+                        localStorage.setItem('booksAPI', JSON.stringify(data));
+                    }
+                   displaydata();
                 }
             })
         } 
@@ -56,4 +60,5 @@ function displaydata(){
 
 
 }}
+
 getApiInfo();
