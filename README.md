@@ -10,7 +10,7 @@ TV Times is your handy web encyclopedia
 
 Technologies Used: html, css, js, bootstrap, jquery, github
 API’s Used: 
-[https://www.tvmaze.com/api](TV MAZE API)
+[TV MAZE API](https://www.tvmaze.com/api)
 []()
 []()
 []()
