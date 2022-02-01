@@ -1,6 +1,6 @@
 # Team-cara-dunes-TV-Times
 
-Link to deployed app [https://sehaj97.github.io/Team-cara-dunes-TV-Times/](https://sehaj97.github.io/Team-cara-dunes-TV-Times/)
+Link to deployed app [https://sehaj97.github.io/TV-Times-App/](https://sehaj97.github.io/TV-Times-App/)
 
 Demo Presentation Link [https://docs.google.com/presentation/d/1pQbs8JDigSjjgjYwfjWqyWk0_bUgmXXzL_BjZbYpvp8/edit?usp=sharing](https://docs.google.com/presentation/d/1pQbs8JDigSjjgjYwfjWqyWk0_bUgmXXzL_BjZbYpvp8/edit?usp=sharing)
 
